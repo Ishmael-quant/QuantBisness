@@ -9,5 +9,5 @@ It is currently just an idea listing website but in the next 6 months,it will be
 I first buld the most basic one-the business idea listing page,then the process of setting up the business,then a place to add an idea then funding from African Diaspora
 
 #How you can help                                                         
-1-You can send business ideas and how to set them up.
+1-You can send business ideas and how to set them up.                                                  
 2-any other that you feel can help

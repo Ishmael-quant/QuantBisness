@@ -11,3 +11,4 @@ I first buld the most basic one-the business idea listing page,then the process 
 #How you can help                                                         
 1-You can send business ideas and how to set them up.                                                  
 2-any other that you feel can help
+3-advice and recommendations

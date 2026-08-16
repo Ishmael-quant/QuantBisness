@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About – QuantBisness</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── About-page specific styles ── */
+
+    .about-hero {
+      background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 20px 64px;
+    }
+
+    .about-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    .about-hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.85;
+      line-height: 1.75;
+    }
+
+    /* ── Mission section ── */
+    .about-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 20px;
+    }
+
+    .about-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-bottom: 16px;
+    }
+
+    .about-section p {
+      color: #4b5563;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 0 20px;
+    }
+
+    /* ── Stats strip ── */
+    .stats-strip {
+      background: #1d4ed8;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 40px 48px;
+      flex: 1;
+      min-width: 160px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Values grid ── */
+    .values-section {
+      background: #f5f7fa;
+      padding: 64px 20px;
+    }
+
+    .values-section h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-bottom: 40px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .value-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      border: 1.5px solid #e5e7eb;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .value-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .value-card p {
+      font-size: 0.9rem;
+      color: #6b7280;
+      line-height: 1.65;
+    }
+
+    /* ── Team section ── */
+    .team-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 20px;
+      text-align: center;
+    }
+
+    .team-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-bottom: 12px;
+    }
+
+    .team-section > p {
+      color: #6b7280;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .team-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .team-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1.5px solid #e5e7eb;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      width: 260px;
+      transition: transform 0.2s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1d4ed8, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 16px;
+      color: #fff;
+    }
+
+    .team-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 4px;
+    }
+
+    .team-card .role {
+      font-size: 0.85rem;
+      color: #2563eb;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .team-card p {
+      font-size: 0.88rem;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* ── CTA banner ── */
+    .about-cta {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 64px 20px;
+    }
+
+    .about-cta h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .about-cta p {
+      opacity: 0.8;
+      max-width: 520px;
+      margin: 0 auto 28px;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .about-cta .btn-primary {
+      font-size: 1rem;
+      padding: 14px 32px;
+    }
+
+    /* ── Problem / Solution ── */
+    .problem-solution {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 64px;
+    }
+
+    .ps-card {
+      flex: 1;
+      min-width: 240px;
+      border-radius: 14px;
+      padding: 28px 24px;
+      border: 1.5px solid #e5e7eb;
+    }
+
+    .ps-card.problem {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    .ps-card.solution {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .ps-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .ps-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1f2937;
+    }
+
+    .ps-card p {
+      font-size: 0.9rem;
+      color: #4b5563;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .ps-arrow {
+      font-size: 2rem;
+      color: #2563eb;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .about-hero h1 { font-size: 1.7rem; }
+      .stat-item { padding: 30px 24px; }
+      .about-cta h2 { font-size: 1.5rem; }
+      .ps-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ──────────────────────────────────────────── -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">QuantBisness</a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────── -->
+  <section class="about-hero">
+    <h1>About QuantBisness</h1>
+    <p>
+      We help African entrepreneurs discover, evaluate, and launch
+      high-potential business ideas — matched to their budget, region, and goals.
+    </p>
+  </section>
+
+  <!-- ── Mission ─────────────────────────────────────────── -->
+  <section class="about-section">
+    <h2>Our Mission</h2>
+    <p>
+      Current economic research shows that <strong>80% of African businesses are born out of
+      survival necessity</strong> — leading to severe "copycat" market saturation and high failure
+      rates driven by a lack of localized market data.
+    </p>
+    <p>
+      QuantBisness was built to solve this structural mismatch. Instead of blind imitation,
+      we use an algorithmic framework that cross-references an entrepreneur's exact
+      <strong>Capital</strong>, <strong>Location</strong>, and <strong>Industry potential</strong>
+      — turning blind survival risks into data-backed business opportunities.
+    </p>
+    <p>
+      Whether you have 500 shillings or 100,000+, there is a path forward built on evidence,
+      not guesswork. Our goal is to make sure you find it.
+    </p>
+  </section>
+
+  <!-- ── Problem / Solution ──────────────────────────────── -->
+  <div class="problem-solution">
+    <div class="ps-card problem">
+      <div class="ps-icon">⚠️</div>
+      <h3>The Problem</h3>
+      <p>
+        80% of African businesses start out of survival necessity, not strategy.
+        The result is saturated markets full of identical ventures competing for
+        the same customers — and most of them fail within two years.
+      </p>
+    </div>
+    <div class="ps-arrow">→</div>
+    <div class="ps-card solution">
+      <div class="ps-icon">✅</div>
+      <h3>Our Solution</h3>
+      <p>
+        An algorithmic framework that matches your exact Capital, Location, and
+        Industry potential to opportunities with real demand — replacing imitation
+        with informed, data-backed decisions.
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── Stats ───────────────────────────────────────────── -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-number">50+</div>
+      <div class="stat-label">Business Ideas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">5</div>
+      <div class="stat-label">African Regions</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">6</div>
+      <div class="stat-label">Industries Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">Free</div>
+      <div class="stat-label">Always</div>
+    </div>
+  </div>
+
+  <!-- ── Values ──────────────────────────────────────────── -->
+  <div class="values-section">
+    <h2>What We Stand For</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🌍</div>
+        <h3>Africa First</h3>
+        <p>Every idea is chosen with African markets, infrastructure, and realities in mind — not imported from elsewhere.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💡</div>
+        <h3>Practical Over Theory</h3>
+        <p>We focus on what actually works on the ground — real capital requirements, real profit potential, real risks.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🔓</div>
+        <h3>Accessible to All</h3>
+        <p>Good ideas should not be locked behind paywalls. QuantBisness is and will remain free to use.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📈</div>
+        <h3>Growth Minded</h3>
+        <p>We are constantly adding new ideas, regions, and resources as the African business landscape evolves.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Team ────────────────────────────────────────────── -->
+  <section class="team-section">
+    <h2>Behind the Platform</h2>
+    <p>A small team passionate about African entrepreneurship, technology, and economic empowerment.</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👨🏾‍💻</div>
+        <h3>Ishmael Mboya</h3>
+        <div class="role">Founder & Developer</div>
+        <p>Student | Aspiring Computer Engineer | Kenya. Passionate about building tools that create real economic opportunity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ─────────────────────────────────────────────── -->
+  <div class="about-cta">
+    <h2>Ready to Find Your Idea?</h2>
+    <p>Browse our curated list of high-potential business opportunities and filter by what matters to you.</p>
+    <a href="index.html">
+      <button class="btn-primary">Explore Business Ideas →</button>
+    </a>
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div class="footer-content">
+      <div>
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:swe.ishmaelmboya@gmail.com">swe.ishmaelmboya@gmail.com</a></p>
+        <p>Phone: +254 754 512 010</p>
+      </div>
+
+      <div class="cta">
+        <h3>Support the Project</h3>
+        <p>If QuantBisness has helped you, consider buying us a coffee.</p>
+        <a href="https://ko-fi.com/ishmaelquant" target="_blank" rel="noopener noreferrer">
+          <button class="btn-primary">☕ Support on Ko-fi</button>
+        </a>
+      </div>
+    </div>
+
+    <p class="copyright">© 2026 Ishmael Mboya. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

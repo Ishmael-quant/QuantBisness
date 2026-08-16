@@ -1,219 +1,223 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<title>Business Ideas For Africans</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuantBisness – Business Ideas For Africans</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- ── Navbar ──────────────────────────────────────────── -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">QuantBisness</a>
 
-    <a class="navbar-brand" href="#">QuantBisness</a>
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <!-- TOGGLER (appears on phone) -->
-    <button class="navbar-toggler" type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- LINKS -->
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-  </div>
-</nav>
+  <!-- ── Hero / Search ───────────────────────────────────── -->
   <section class="search-info">
+    <h1>Find Your Next Business Idea</h1>
     <p class="search-text">
-      Welcome to QuantBisness.
-    In this website, you search for a business that will work out and have maximum profit.You just need to put in your   specifications and other valuable information. You can also use filter instead of adding by yourself.
+      Discover high-potential business opportunities tailored for Africa.
+      Search by name, filter by budget, industry, or region — and get started today.
     </p>
-    <p>The Top Ten results will Appear</p>
+    <p class="top-results-note">Top matching results will appear below</p>
 
-    <form class="search-box">
-      <input type="text" id="searchInput" onkeyup="applyFilters()">
-      <button type="submit">🔍</button>
+    <form class="search-box" role="search" onsubmit="return false;">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search business ideas…"
+        aria-label="Search business ideas"
+        onkeyup="applyFilters()">
+      <button type="submit" aria-label="Search">🔍</button>
     </form>
   </section>
-  <div class="filter-bar">
 
-    <select id="priceFilter" onchange="applyFilters()">
-      <option value="all">Price (All)</option>
-      <option value="p500">500</option>
-      <option value="p1000">1,000</option>
-      <option value="p10000">10,000</option>
-     <option value="p100000+">100,000 +</option>
+  <!-- ── Filter Bar ──────────────────────────────────────── -->
+  <div class="filter-bar" role="group" aria-label="Filter options">
+    <select id="priceFilter" onchange="applyFilters()" aria-label="Filter by price">
+      <option value="all">💰 Price (All)</option>
+      <option value="p500">Under 500</option>
+      <option value="p1000">Under 1,000</option>
+      <option value="p10000">Under 10,000</option>
+      <option value="p100000+">100,000+</option>
     </select>
 
-    <select id="industryFilter" onchange="applyFilters()">
-      <option value="all">Industry (All)</option>
+    <select id="industryFilter" onchange="applyFilters()" aria-label="Filter by industry">
+      <option value="all">🏭 Industry (All)</option>
       <option value="tech">Tech</option>
       <option value="agric">Agriculture & Food</option>
       <option value="digital">Digital</option>
       <option value="education">Education</option>
-      <option value="stores">Stores/Market</option>
+      <option value="stores">Stores / Market</option>
     </select>
 
-    <select id="regionFilter" onchange="applyFilters()">
-      <option value="all">Region (All)</option>
-      <option value="local">Eatern Africa</option>
+    <select id="regionFilter" onchange="applyFilters()" aria-label="Filter by region">
+      <option value="all">🌍 Region (All)</option>
+      <option value="local">Eastern Africa</option>
       <option value="Western Africa">Western Africa</option>
       <option value="Northen Africa">Northern Africa</option>
       <option value="Southern Africa">Southern Africa</option>
       <option value="Middle Africa">Middle Africa</option>
     </select>
   </div>
-  <div class="idea-grid">
+
+  <!-- ── Cards ───────────────────────────────────────────── -->
+  <div class="idea-grid" id="cardGrid">
+
     <div class="idea-card p1000 tech local">
-      <img src="https://imgs.search.brave.com/6Vgbcei780fLcCzI46aexancBHyYUBMgpUDZ8J9pE-A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93aWtp/LnRlc3RndXkubmV0/L3VwbG9hZHMvZGVm/YXVsdC9vcmlnaW5h/bC8xWC82MWY2NWFl/NGNmZDc5YjA3MGRl/NGU1ZjJkMzUzZTYz/ZDg4MzlmZmI0Lmpw/ZWc" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/6Vgbcei780fLcCzI46aexancBHyYUBMgpUDZ8J9pE-A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93aWtp/LnRlc3RndXkubmV0/L3VwbG9hZHMvZGVm/YXVsdC9vcmlnaW5h/bC8xWC82MWY2NWFl/NGNmZDc5YjA3MGRl/NGU1ZjJkMzUzZTYz/ZDg4MzlmZmI0Lmpw/ZWc" alt="Electronic Device Repairs">
       <div class="idea-content">
-        <h3>Electronic Device repairs</h3>
-        <p>Start a small food kiosk with low capital and daily customers.</p>
-        <a href="idea-pages/electronic.html" class="idea-btn">
-          Show more
-        </a>
+        <h3>Electronic Device Repairs</h3>
+        <p>Start a repair shop for phones, laptops, and gadgets with low capital and a steady stream of daily customers.</p>
+        <a href="idea-pages/electronic.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p1000 stores all">
-      <img src="https://imgs.search.brave.com/HErP0Bi9DALW5kR22rXUOmr78iA-KRTRiLsrt_p1MY4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/NzAvNzAzMi9maWxl/cy90aGVtZXNfY2Nl/NzdiZDQtY2U1MC00/OWE3LTliN2YtODM3/NjBhZDAxMjA1LnBu/Zz92PTE2ODUxMjQw/Njc" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/HErP0Bi9DALW5kR22rXUOmr78iA-KRTRiLsrt_p1MY4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/NzAvNzAzMi9maWxl/cy90aGVtZXNfY2Nl/NzdiZDQtY2U1MC00/OWE3LTliN2YtODM3/NjBhZDAxMjA1LnBu/Zz92PTE2ODUxMjQw/Njc" alt="E-Commerce">
       <div class="idea-content">
         <h3>E-Commerce</h3>
-        <p>The most successful business ideas in Africa span multiple sectors, driven by growing populations, urbanization, technological adoption, and increasing demand for local solutions.</p>
-        <a href="idea-pages/ecommerce.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Tap into Africa's booming online market. Driven by growing populations, urbanisation, and technology adoption across multiple sectors.</p>
+        <a href="idea-pages/ecommerce.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p500 tech all">
-      <img src="https://imgs.search.brave.com/RcVJO5l8fQ-Mh2Q4DGb-9kuYOIF2PKpAGfMs1hehQt8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA3Lzg0Lzk5LzEw/LzM2MF9GXzc4NDk5/MTA5Ml94NVBva05a/NkV5OXRxR3ZFbHR3/ZkNocXZVNHc0ZXRX/SC5qcGc" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/RcVJO5l8fQ-Mh2Q4DGb-9kuYOIF2PKpAGfMs1hehQt8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA3Lzg0Lzk5LzEw/LzM2MF9GXzc4NDk5/MTA5Ml94NVBva05a/NkV5OXRxR3ZFbHR3/ZkNocXZVNHc0ZXRX/SC5qcGc" alt="Freelancing">
       <div class="idea-content">
         <h3>Freelancing</h3>
-        <p>High-potential sector, offering professionals in countries like Nigeria and Kenya the chance to earn an average of $25 per hour by providing services in graphic design, software development, writing, and virtual assistance to a global clientele.</p>
-        <a href="idea-pages/food-kiosk.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Earn an average of $25/hr providing graphic design, software development, writing, or virtual assistance to a global clientele from Nigeria, Kenya, and beyond.</p>
+        <a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a>
       </div>
     </div>
-  </div>
-  <div class="idea-grid">
-    <div class="idea-card p1000 aric all">
-      <img src="https://imgs.search.brave.com/dAyj1Tw_saUbl4Tci1PfXrZomaJ_lIWzjfjv8PA2Ivk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzUv/MjExLzgxNC9zbWFs/bC9mcmVzaGx5LWhh/cnZlc3RlZC1jYXNz/YXZhLXJvb3RzLXBp/bGUtb3V0ZG9vcnMt/ZnJlZS1waG90by5q/cGc" alt="Food Kiosk Business">
+
+    <div class="idea-card p1000 agric all">
+      <img src="https://imgs.search.brave.com/dAyj1Tw_saUbl4Tci1PfXrZomaJ_lIWzjfjv8PA2Ivk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzUv/MjExLzgxNC9zbWFs/bC9mcmVzaGx5LWhh/cnZlc3RlZC1jYXNz/YXZhLXJvb3RzLXBp/bGUtb3V0ZG9vcnMt/ZnJlZS1waG90by5q/cGc" alt="Cassava Processing">
       <div class="idea-content">
         <h3>Cassava Processing</h3>
-        <p>processing cassava into flour, starch, or bioethanol, or producing value-added products like packaged spices and organic fruits, present significant market potential.</p>
-        <a href="idea-pages/food-kiosk.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Process cassava into flour, starch, or bioethanol. Value-added products like packaged spices and organic fruits present significant market potential.</p>
+        <a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p100000+ tech all">
-      <img src="https://imgs.search.brave.com/PpB3PYxheK4r8csCAPcU56YiZs2keUACUzMwRuba69w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTkw/ODkwMjQ5NC9waG90/by93YXN0ZS1lbmVy/Z3ktcmVjb3Zlcnkt/cGxhbnQtYW1zdGVy/ZGFtLXdlc3Rwb29y/dC1idXJuaW5nLXdh/c3RlLXRvLXJlY292/ZXJ5LWVuZXJneS1h/ZXJpYWwtZHJvbmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXZmTXRMSmxGZVkt/NF9IVERxU3dhX1V3/cGdTSlpha0VvZzNW/X29XLXJqNm89" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/PpB3PYxheK4r8csCAPcU56YiZs2keUACUzMwRuba69w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTkw/ODkwMjQ5NC9waG90/by93YXN0ZS1lbmVy/Z3ktcmVjb3Zlcnkt/cGxhbnQtYW1zdGVy/ZGFtLXdlc3Rwb29y/dC1idXJuaW5nLXdh/c3RlLXRvLXJlY292/ZXJ5LWVuZXJneS1h/ZXJpYWwtZHJvbmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXZmTXRMSmxGZVkt/NF9IVERxU3dhX1V3/cGdTSlpha0VvZzNW/X29XLXJqNm89" alt="Waste-to-Energy Plant">
       <div class="idea-content">
         <h3>Waste-to-Energy Plant</h3>
-        <p>Renewable energy and green technology are rapidly growing sectors, with businesses focused on solar power, biogas generation from organic waste, and eco-friendly manufacturing gaining traction.</p>
-        <a href="idea-pages/food-kiosk.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Renewable energy and green tech are rapidly growing. Solar power, biogas from organic waste, and eco-friendly manufacturing are gaining serious traction.</p>
+        <a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p100000+ all all">
-      <img src="https://imgs.search.brave.com/LXjs7ne7lS3BQAttO3-5Jmw07NZZPUoFjd2DvLt4TZs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c29iaGEuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDgvcm9sZS1v/Zi10ZWNobm9sb2d5/LW1vZGVybi1yZWFs/LWVzdGF0ZS1pbmR1/c3RyeS04MDB4NDAw/LnBuZw" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/LXjs7ne7lS3BQAttO3-5Jmw07NZZPUoFjd2DvLt4TZs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c29iaGEuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDgvcm9sZS1v/Zi10ZWNobm9sb2d5/LW1vZGVybi1yZWFs/LWVzdGF0ZS1pbmR1/c3RyeS04MDB4NDAw/LnBuZw" alt="Real Estate & Property Tech">
       <div class="idea-content">
-        <h3>Real Estate and Property technology</h3>
-        <p>The demand for affordable housing and short-term rentals is rising, especially in economic hubs</p>
-        <a href="idea-pages/realestate.html" class="idea-btn">
-          Show more
-        </a>
+        <h3>Real Estate & Property Tech</h3>
+        <p>Demand for affordable housing and short-term rentals is rising fast, especially in economic hubs across the continent.</p>
+        <a href="idea-pages/realestate.html" class="idea-btn">Show more</a>
       </div>
     </div>
-  </div>
-  <div class="idea-grid">
+
     <div class="idea-card p10000 tech all">
-      <img src="https://imgs.search.brave.com/7vJI37W5nHzC29mE9u9O3mPdtgwrfuzYg0ohRkR2QZ4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzAv/Mzc0LzQ5MC9zbWFs/bC9jb2Rpbmctb24t/Y29tcHV0ZXItc2Ny/ZWVuLXNvZnR3YXJl/LWRldmVsb3BtZW50/LWRpZ2l0YWwtdGVj/aG5vbG9neS1mcmVl/LXBob3RvLmpwZw" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/7vJI37W5nHzC29mE9u9O3mPdtgwrfuzYg0ohRkR2QZ4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzAv/Mzc0LzQ5MC9zbWFs/bC9jb2Rpbmctb24t/Y29tcHV0ZXItc2Ny/ZWVuLXNvZnR3YXJl/LWRldmVsb3BtZW50/LWRpZ2l0YWwtdGVj/aG5vbG9neS1mcmVl/LXBob3RvLmpwZw" alt="Software Development">
       <div class="idea-content">
-        <h3>Technology and software development</h3>
-        <p>the most profitable business sectors in Africa, supported by a growing number of tech hubs across Accra, Lagos, Nairobi, and Johannesburg.
- These hubs serve as incubators for innovation, producing successful startups that solve local challenges and attract global attention.</p>
-        <a href="idea-pages/techdev.html" class="idea-btn">
-          Show more
-        </a>
+        <h3>Technology & Software Development</h3>
+        <p>One of Africa's most profitable sectors. Tech hubs in Accra, Lagos, Nairobi, and Johannesburg are incubating startups that solve local challenges and attract global attention.</p>
+        <a href="idea-pages/techdev.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p1000 stores all">
-      <img src="https://imgs.search.brave.com/qVH5kmCmPkuAFzuPaLxt0ZbSGX4_d_ptgFQLlZB3OH4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuaXN1LnB1Yi9k/b2N1bWVudC1zdHJ1/Y3R1cmUvMjEwNzI5/MTMzMDU2LWM4ODll/ZmU0OGVjZmY0MTIw/Nzg3YmYzNmQxYzhl/NGRlL3YxL2FkYjJj/Mzk0Y2JlNWY3YWIy/MTZkZjE2MDExMmY0/ZTFhLmpwZWc_Y3Jv/cD0xNjU3LDEyNDMs/eDQxMix5MCZvcmln/aW5hbEhlaWdodD0x/MjQzJm9yaWdpbmFs/V2lkdGg9MjQ4MSZ6/b29tPTE" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/qVH5kmCmPkuAFzuPaLxt0ZbSGX4_d_ptgFQLlZB3OH4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuaXN1LnB1Yi9k/b2N1bWVudC1zdHJ1/Y3R1cmUvMjEwNzI5/MTMzMDU2LWM4ODll/ZmU0OGVjZmY0MTIw/Nzg3YmYzNmQxYzhl/NGRlL3YxL2FkYjJj/Mzk0Y2JlNWY3YWIy/MTZkZjE2MDExMmY0/ZTFhLmpwZWc_Y3Jv/cD0xNjU3LDEyNDMs/eDQxMix5MCZvcmln/aW5hbEhlaWdodD0x/MjQzJm9yaWdpbmFs/V2lkdGg9MjQ4MSZ6/b29tPTE" alt="Fashion & Beauty">
       <div class="idea-content">
         <h3>Fashion & Beauty Industry</h3>
-        <p>driven by Africa’s young population and rising disposable incomes. Entrepreneurs are capitalizing on this trend by launching local brands that cater to African aesthetics and needs, such as Suzie Wokabi’s successful cosmetic brand.</p>
-        <a href="idea-pages/fashion.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Driven by Africa's young population and rising incomes, local brands catering to African aesthetics are thriving — like Suzie Wokabi's cosmetics brand.</p>
+        <a href="idea-pages/fashion.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
     <div class="idea-card p100000 all all">
-      <img src="https://imgs.search.brave.com/ZUnckFoSKGfDC6cppV5UnL7AV2pFp1SdFLeruAWmyUU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9lbGVw/aGFudHMtZmFtaWx5/LXNhdmFubmEtc2Fm/YXJpLWFtYm9zZWxp/LWtlbnlhLWFmcmlj/YS0yOTIyMjIwNi5q/cGc" alt="Food Kiosk Business">
+      <img src="https://imgs.search.brave.com/ZUnckFoSKGfDC6cppV5UnL7AV2pFp1SdFLeruAWmyUU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9lbGVw/aGFudHMtZmFtaWx5/LXNhdmFubmEtc2Fm/YXJpLWFtYm9zZWxp/LWtlbnlhLWFmcmlj/YS0yOTIyMjIwNi5q/cGc" alt="Tourism">
       <div class="idea-content">
         <h3>Tourism</h3>
-        <p>with Africa’s rich cultural heritage, diverse landscapes, and historical sites attracting increasing numbers of international visitors.
- Businesses that offer unique experiences—such as eco-tourism, cultural tours, or adventure travel—can thrive by tapping into this demand.</p>
-        <a href="idea-pages/tourism.html" class="idea-btn">
-          Show more
-        </a>
+        <p>Africa's rich heritage, diverse landscapes, and historic sites attract growing numbers of visitors. Eco-tourism, cultural tours, and adventure travel are thriving niches.</p>
+        <a href="idea-pages/tourism.html" class="idea-btn">Show more</a>
       </div>
     </div>
+
+    <!-- No-results placeholder -->
+    <div id="no-results">No business ideas match your filters. Try adjusting your search.</div>
+
   </div>
-	
-  <footer  id="contact"class="footer">
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="footer" id="contact">
     <div class="footer-content">
       <div>
         <h3>Contact</h3>
-        <p>Email: swe.ishmaelmboya@gmail.com</p>
+        <p>Email: <a href="mailto:swe.ishmaelmboya@gmail.com">swe.ishmaelmboya@gmail.com</a></p>
         <p>Phone: +254 754 512 010</p>
       </div>
 
       <div class="cta">
         <h3>Get Started</h3>
         <p>Join QuantBisness today and start planning your earning journey.</p>
-        <a href="https://ko-fi.com/ishmaelquant">
-          <button class="btn-primary">Support</button>
+        <a href="https://ko-fi.com/ishmaelquant" target="_blank" rel="noopener noreferrer">
+          <button class="btn-primary">☕ Support on Ko-fi</button>
         </a>
       </div>
     </div>
 
-    <p class="copyright">
-      © 2026 Ishmael Mboya. All rights reserved.
-    </p>
+    <p class="copyright">© 2026 Ishmael Mboya. All rights reserved.</p>
   </footer>
+
+  <!-- ── Scripts ──────────────────────────────────────────── -->
   <script>
     function applyFilters() {
-      const price = document.getElementById('priceFilter').value;
+      const price    = document.getElementById('priceFilter').value;
       const industry = document.getElementById('industryFilter').value;
-      const region = document.getElementById('regionFilter').value;
-      const search = document.getElementById('searchInput').value.toLowerCase();
+      const region   = document.getElementById('regionFilter').value;
+      const search   = document.getElementById('searchInput').value.toLowerCase();
+
+      let visibleCount = 0;
 
       document.querySelectorAll('.idea-card').forEach(card => {
-        const matchPrice = price === 'all' || card.classList.contains(price);
+        const matchPrice    = price    === 'all' || card.classList.contains(price);
         const matchIndustry = industry === 'all' || card.classList.contains(industry);
-        const matchRegion = region === 'all' || card.classList.contains(region);
-        const matchSearch = card.innerText.toLowerCase().includes(search);
+        const matchRegion   = region   === 'all' || card.classList.contains(region);
+        const matchSearch   = card.innerText.toLowerCase().includes(search);
+        const visible       = matchPrice && matchIndustry && matchRegion && matchSearch;
 
-        card.style.display =
-          matchPrice && matchIndustry && matchRegion && matchSearch
-            ? 'block'
-            : 'none';
+        card.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
       });
+
+      const noResults = document.getElementById('no-results');
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     }
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
-

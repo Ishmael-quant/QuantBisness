@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Review and manage QuantBisness ideas.">
+  <title>Idea Administration | QuantBisness</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="database.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="QuantBisness home">
+      <span class="brand-copy"><strong>Quant<span>Bisness</span></strong><small>Discover. Explore. Grow.</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="ideas.html">Explore</a>
+      <a href="account.html">Account</a>
+      <a href="admin.html" aria-current="page">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="database-status" id="adminStatus" role="status" aria-live="polite"></p>
+
+    <section class="database-panel" id="adminLoginPanel">
+      <h1>Idea administration</h1>
+      <p>Sign in with an admin account to review submissions and manage the public listing.</p>
+      <form class="database-form" id="adminSignInForm">
+        <label>Email <input type="email" name="email" autocomplete="username" required></label>
+        <label>Password <input type="password" name="password" autocomplete="current-password" required></label>
+        <button type="submit">Admin sign in</button>
+      </form>
+      <button class="database-action" id="adminLoginSignOutButton" type="button" hidden>Sign out of this account</button>
+    </section>
+
+    <section class="database-panel" id="adminPanel" hidden>
+      <h1>Manage business ideas</h1>
+      <p id="adminSignedInAs"></p>
+      <button class="database-action" id="adminSignOutButton" type="button">Sign out</button>
+
+      <h2 id="ideaFormTitle">Add an idea</h2>
+      <form class="database-form" id="ideaForm">
+        <input type="hidden" name="id">
+        <label>Name <input name="name" maxlength="100" required></label>
+        <label>Slug <input name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" required></label>
+        <label>Description <textarea name="description" minlength="10" maxlength="2000" required></textarea></label>
+        <label>Image URL (optional) <input name="image_url" type="url"></label>
+        <label>Details URL (optional) <input name="details_url" type="url"></label>
+        <label>Budget
+          <select name="budget_tier" required>
+            <option value="p500">Under 500</option>
+            <option value="p1000">Under 1,000</option>
+            <option value="p10000">Under 10,000</option>
+            <option value="p100000+">100,000+</option>
+          </select>
+        </label>
+        <label>Industry
+          <select name="industry" required>
+            <option value="tech">Technology</option>
+            <option value="agric">Agriculture &amp; Food</option>
+            <option value="digital">Digital</option>
+            <option value="education">Education</option>
+            <option value="stores">E-commerce &amp; Retail</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>Region
+          <select name="region">
+            <option value="">All of Africa</option>
+            <option value="local">Eastern Africa</option>
+            <option value="western">Western Africa</option>
+            <option value="northern">Northern Africa</option>
+            <option value="southern">Southern Africa</option>
+            <option value="middle">Middle Africa</option>
+          </select>
+        </label>
+        <label>Status
+          <select name="status" required>
+            <option value="approved">Approved / public</option>
+            <option value="pending">Pending review</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </label>
+        <div class="database-actions">
+          <button class="database-action" type="submit">Save idea</button>
+          <button id="cancelEditButton" type="button" hidden>Cancel edit</button>
+        </div>
+      </form>
+
+      <h2>All submissions and listings</h2>
+      <div class="database-table-wrap">
+        <table class="database-table">
+          <thead><tr><th>Idea</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead>
+          <tbody id="adminIdeas"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

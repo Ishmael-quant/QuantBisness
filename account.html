@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign in to save business ideas and submit ideas for review.">
+  <title>Your Account | QuantBisness</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="database.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="QuantBisness home">
+      <span class="brand-copy"><strong>Quant<span>Bisness</span></strong><small>Discover. Explore. Grow.</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="ideas.html">Explore</a>
+      <a href="account.html" aria-current="page">Account</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="database-status" id="accountStatus" role="status" aria-live="polite"></p>
+
+    <section class="database-panel" id="authPanel">
+      <h1>Your QuantBisness account</h1>
+      <p>Sign in to save business ideas and submit an idea for admin review. Browsing remains open to everyone.</p>
+      <form class="database-form" id="signInForm">
+        <h2>Sign in</h2>
+        <label>Email <input type="email" name="email" autocomplete="email" required></label>
+        <label>Password <input type="password" name="password" autocomplete="current-password" minlength="8" required></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <form class="database-form" id="signUpForm">
+        <h2>Create an account</h2>
+        <label>Email <input type="email" name="email" autocomplete="email" required></label>
+        <label>Password <input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+        <button type="submit">Create account</button>
+      </form>
+    </section>
+
+    <section class="database-panel" id="memberPanel" hidden>
+      <h1>Your saved ideas</h1>
+      <p id="signedInAs"></p>
+      <button class="database-action" id="signOutButton" type="button">Sign out</button>
+      <h2>Favorites</h2>
+      <ul class="database-list" id="favoritesList"></ul>
+
+      <h2>Submit a business idea</h2>
+      <p>Submissions stay private until an admin reviews and approves them.</p>
+      <form class="database-form" id="submissionForm">
+        <label>Business idea name <input name="name" maxlength="100" required></label>
+        <label>Description <textarea name="description" minlength="10" maxlength="2000" required></textarea></label>
+        <label>Budget
+          <select name="budget_tier" required>
+            <option value="p500">Under 500</option>
+            <option value="p1000">Under 1,000</option>
+            <option value="p10000">Under 10,000</option>
+            <option value="p100000+">100,000+</option>
+          </select>
+        </label>
+        <label>Industry
+          <select name="industry" required>
+            <option value="tech">Technology</option>
+            <option value="agric">Agriculture &amp; Food</option>
+            <option value="digital">Digital</option>
+            <option value="education">Education</option>
+            <option value="stores">E-commerce &amp; Retail</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>Region
+          <select name="region">
+            <option value="">All of Africa</option>
+            <option value="local">Eastern Africa</option>
+            <option value="western">Western Africa</option>
+            <option value="northern">Northern Africa</option>
+            <option value="southern">Southern Africa</option>
+            <option value="middle">Middle Africa</option>
+          </select>
+        </label>
+        <button type="submit">Submit for review</button>
+      </form>
+
+      <h2>Your submissions</h2>
+      <ul class="database-list" id="submissionsList"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="account.js"></script>
+</body>
+</html>

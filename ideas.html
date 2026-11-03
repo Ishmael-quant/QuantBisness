@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search and filter business ideas by budget, industry, and region. Find an opportunity that fits your plans.">
+  <title>Explore Business Ideas | QuantBisness</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="database.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="QuantBisness home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" role="img">
+          <circle cx="21" cy="21" r="15" fill="none" stroke="currentColor" stroke-width="6"/>
+          <path d="m32 32 11 11M14 27l8-8 6 4 9-12" fill="none" stroke="#ffb31a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+          <path d="M33 11h5v5" fill="none" stroke="#ffb31a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+        </svg>
+      </span>
+      <span class="brand-copy"><strong>Quant<span>Bisness</span></strong><small>Discover. Explore. Grow.</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="ideas.html" aria-current="page">Explore</a>
+      <a href="account.html">Account &amp; saved ideas</a>
+      <a href="about.html">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="header-cta" href="#directory">Browse ideas <span aria-hidden="true">↓</span></a>
+  </header>
+
+  <main>
+    <section class="directory-hero">
+      <div class="directory-hero-inner">
+        <p class="eyebrow"><span></span> Your next opportunity starts here</p>
+        <h1>Explore business ideas</h1>
+        <p>Search opportunities and narrow them down by budget, industry, or region.</p>
+        <form class="directory-search search-box" role="search" onsubmit="return false;">
+          <label class="sr-only" for="searchInput">Search business ideas</label>
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="search" id="searchInput" placeholder="Try “agriculture” or “tourism”..." oninput="applyFilters()">
+          <button type="submit" aria-label="Search business ideas">Search <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="results-count" id="resultsCount" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="ideas-section directory-section" id="directory">
+      <div class="section-heading">
+        <div><p class="eyebrow">Find your starting point</p><h2>Ideas for your next move</h2></div>
+        <p class="section-description">Choose a budget, sector, or region to find opportunities that match your interests.</p>
+      </div>
+      <div class="filter-bar" role="group" aria-label="Filter business ideas">
+        <label class="sr-only" for="priceFilter">Filter by budget</label>
+        <select id="priceFilter" onchange="applyFilters()">
+          <option value="all">Budget: Any</option>
+          <option value="p500">Under 500</option>
+          <option value="p1000">Under 1,000</option>
+          <option value="p10000">Under 10,000</option>
+          <option value="p100000+">100,000+</option>
+        </select>
+        <label class="sr-only" for="industryFilter">Filter by industry</label>
+        <select id="industryFilter" onchange="applyFilters()">
+          <option value="all">Industry: Any</option>
+          <option value="tech">Technology</option>
+          <option value="agric">Agriculture &amp; Food</option>
+          <option value="digital">Digital</option>
+          <option value="education">Education</option>
+          <option value="stores">E-commerce &amp; Retail</option>
+        </select>
+        <label class="sr-only" for="regionFilter">Filter by region</label>
+        <select id="regionFilter" onchange="applyFilters()">
+          <option value="all">Region: Any</option>
+          <option value="local">Eastern Africa</option>
+          <option value="western">Western Africa</option>
+          <option value="northern">Northern Africa</option>
+          <option value="southern">Southern Africa</option>
+          <option value="middle">Middle Africa</option>
+        </select>
+        <button class="clear-filters" type="button" id="clearFilters">Clear filters</button>
+      </div>
+
+      <p class="database-status" id="databaseStatus" role="status" aria-live="polite"></p>
+      <div class="idea-grid" id="cardGrid">
+        <article class="idea-card p1000 tech local">
+          <img src="https://imgs.search.brave.com/6Vgbcei780fLcCzI46aexancBHyYUBMgpUDZ8J9pE-A/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93aWtp/LnRlc3RndXkubmV0/L3VwbG9hZHMvZGVm/YXVsdC9vcmlnaW5h/bC8xWC82MWY2NWFl/NGNmZDc5YjA3MGRl/NGU1ZjJkMzUzZTYz/ZDg4MzlmZmI0Lmpw/ZWc" alt="Electronics and tools used in a device repair business" loading="lazy">
+          <div class="idea-content"><h3>Electronic Device Repairs</h3><p>Start a repair shop for phones, laptops, and gadgets with low capital and a steady stream of daily customers.</p><a href="idea-pages/electronic.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p1000 stores all">
+          <img src="https://imgs.search.brave.com/HErP0Bi9DALW5kR22rXUOmr78iA-KRTRiLsrt_p1MY4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/NzAvNzAzMi9maWxl/cy90aGVtZXNfY2Nl/NzdiZDQtY2U1MC00/OWE3LTliN2YtODM3/NjBhZDAxMjA1LnBu/Zz92PTE2ODUxMjQwNjc" alt="Online store and e-commerce products" loading="lazy">
+          <div class="idea-content"><h3>E-Commerce</h3><p>Tap into Africa's booming online market, driven by growing populations, urbanisation, and technology adoption.</p><a href="idea-pages/ecommerce.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p500 tech all">
+          <img src="https://imgs.search.brave.com/RcVJO5l8fQ-Mh2Q4DGb-9kuYOIF2PKpAGfMs1hehQt8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA3Lzg0Lzk5LzEw/LzM2MF9GXzc4NDk5/MTA5Ml94NVBva05a/NkV5OXRxR3ZFbHR3/ZkNocXZVNHc0ZXRX/SC5qcGc" alt="Freelancer working on a computer" loading="lazy">
+          <div class="idea-content"><h3>Freelancing</h3><p>Earn by providing graphic design, software development, writing, or virtual assistance to a global clientele.</p><a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p1000 agric all">
+          <img src="https://imgs.search.brave.com/dAyj1Tw_saUbl4Tci1PfXrZomaJ_lIWzjfjv8PA2Ivk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlemku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzUv/MjExLzgxNC9zbWFs/bC9mcmVzaGx5LWhh/cnZlc3RlZC1jYXNz/YXZhLXJvb3RzLXBp/bGUtb3V0ZG9vcnMt/ZnJlZS1waG90by5q/cGc" alt="Freshly harvested cassava roots" loading="lazy">
+          <div class="idea-content"><h3>Cassava Processing</h3><p>Process cassava into flour, starch, or bioethanol and build value-added food products for local markets.</p><a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p100000+ tech all">
+          <img src="https://imgs.search.brave.com/PpB3PYxheK4r8csCAPcU56YiZs2keUACUzMwRuba69w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTkw/ODkwMjQ5NC9waG90/by93YXN0ZS1lbmVy/Z3ktcmVjb3Zlcnkt/cGxhbnQtYW1zdGVy/ZGFtLXdlc3Rwb29y/dC1idXJuaW5nLXdh/c3RlLXRvLXJlY292/ZXJ5LWVuZXJneS1h/ZXJpYWwtZHJvbmUu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXZmTXRMSmxGZVkt/NF9IVERxU3dhX1V3/cGdTSlpha0VvZzNW/X29XLXJqNm89" alt="Waste-to-energy facility" loading="lazy">
+          <div class="idea-content"><h3>Waste-to-Energy Plant</h3><p>Explore renewable energy and green technology through solar power, biogas, and eco-friendly manufacturing.</p><a href="idea-pages/food-kiosk.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p100000+ all all">
+          <img src="https://imgs.search.brave.com/LXjs7ne7lS3BQAttO3-5Jmw07NZZPUoFjd2DvLt4TZs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c29iaGEuY29tL2Js/b2cvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDgvcm9sZS1v/Zi10ZWNobm9sb2d5/LW1vZGVybi1yZWFs/LWVzdGF0ZS1pbmR1/c3RyeS04MDB4NDAw/LnBuZw" alt="Modern real estate and property development" loading="lazy">
+          <div class="idea-content"><h3>Real Estate &amp; Property Tech</h3><p>Meet the demand for affordable housing, property services, and short-term rentals in growing economic hubs.</p><a href="idea-pages/realestate.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p10000 tech all">
+          <img src="https://imgs.search.brave.com/7vJI37W5nHzC29mE9u9O3mPdtgwrfuzYg0ohRkR2QZ4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlemku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzAv/Mzc0LzQ5MC9zbWFs/bC9jb2Rpbmctb24t/Y29tcHV0ZXItc2Ny/ZWVuLXNvZnR3YXJl/LWRldmVsb3BtZW50/LWRpZ2l0YWwtdGVj/aG5vbG9neS1mcmVl/LXBob3RvLmpwZw" alt="Software developer working on a computer" loading="lazy">
+          <div class="idea-content"><h3>Technology &amp; Software Development</h3><p>Build software that solves local challenges in Africa's growing technology hubs and markets.</p><a href="idea-pages/techdev.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p1000 stores all">
+          <img src="https://imgs.search.brave.com/qVH5kmCmPkuAFzuPaLxt0ZbSGX4_d_ptgFQLlZB3OH4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuaXN1LnB1Yi9k/b2N1bWVudC1zdHJ1/Y3R1cmUvMjEwNzI5/MTMzMDU2LWM4ODll/ZmU0OGVjZmY0MTIw/Nzg3YmYzNmQxYzhl/NGRlL3YxL2FkYjJj/Mzk0Y2JlNWY3YWIy/MTZkZjE2MDExMmY0/ZTFhLmpwZWc_Y3Jv/cD0xNjU3LDEyNDMs/eDQxMix5MCZvcmln/aW5hbEhlaWdodD0x/MjQzJm9yaWdpbmFs/V2lkdGg9MjQ4MSZ6/b29tPTE" alt="Fashion and beauty products" loading="lazy">
+          <div class="idea-content"><h3>Fashion &amp; Beauty Industry</h3><p>Build a local brand inspired by Africa's young population, rising incomes, and distinctive styles.</p><a href="idea-pages/fashion.html" class="idea-btn">Show more</a></div>
+        </article>
+        <article class="idea-card p100000 all all">
+          <img src="https://imgs.search.brave.com/ZUnckFoSKGfDC6cppV5UnL7AV2pFp1SdFLeruAWmyUU/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9lbGVw/aGFudHMtZmFtaWx5/LXNhdmFubmEtc2Fm/YXJpLWFtYm9zZWxp/LWtlbnlhLWFmcmlj/YS0yOTIyMjIwNi5q/cGc" alt="Elephants on the African savanna" loading="lazy">
+          <div class="idea-content"><h3>Tourism</h3><p>Share Africa's heritage, landscapes, and historic sites through eco-tourism, cultural tours, and adventure travel.</p><a href="idea-pages/tourism.html" class="idea-btn">Show more</a></div>
+        </article>
+        <p id="no-results" role="status">No business ideas match your filters. Try adjusting your search.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer directory-footer" id="contact">
+    <div class="footer-banner"><span>✦</span> Discover. Explore. Grow.<span>✦</span></div>
+    <p class="copyright">© 2026 Ishmael Mboya. All rights reserved. <a href="index.html#contact">Contact us</a></p>
+  </footer>
+
+  <script>
+    function applyFilters() {
+      const price = document.getElementById('priceFilter').value;
+      const industry = document.getElementById('industryFilter').value;
+      const region = document.getElementById('regionFilter').value;
+      const search = document.getElementById('searchInput').value.trim().toLowerCase();
+      const cards = document.querySelectorAll('.idea-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const visible =
+          (price === 'all' || card.classList.contains(price)) &&
+          (industry === 'all' || card.classList.contains(industry)) &&
+          (region === 'all' || card.classList.contains(region)) &&
+          card.innerText.toLowerCase().includes(search);
+        card.hidden = !visible;
+        if (visible) visibleCount++;
+      });
+
+      document.getElementById('no-results').hidden = visibleCount > 0;
+      document.getElementById('resultsCount').textContent =
+        `${visibleCount} ${visibleCount === 1 ? 'idea' : 'ideas'} found`;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const searchParam = params.get('search');
+    const industryParam = params.get('industry');
+    const validIndustries = ['tech', 'agric', 'digital', 'education', 'stores'];
+
+    if (searchParam) document.getElementById('searchInput').value = searchParam;
+    if (validIndustries.includes(industryParam)) {
+      document.getElementById('industryFilter').value = industryParam;
+    }
+
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('priceFilter').value = 'all';
+      document.getElementById('industryFilter').value = 'all';
+      document.getElementById('regionFilter').value = 'all';
+      window.history.replaceState(null, '', window.location.pathname);
+      applyFilters();
+    });
+
+    applyFilters();
+  </script>
+  <script type="module" src="ideas.js"></script>
+</body>
+</html>

@@ -15,4 +15,4 @@ I first buld the most basic one-the business idea listing page,then the process 
 
 ## Pages
 - [Home](https://ishmael-quant.github.io/QuantBisness/index.html)) introduces QuantBisness and links to business sectors.
-- [Explore business ideas]((https://ishmael-quant.github.io/QuantBisness/ideas.html)) provides searchable listings and budget, industry, and region filters.
+- [Explore business ideas](https://ishmael-quant.github.io/QuantBisness/ideas.html)) provides searchable listings and budget, industry, and region filters.

@@ -16,7 +16,8 @@
     <nav class="main-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="ideas.html">Explore</a>
-      <a href="account.html">Account</a>
+      <a href="account.html#sign-in" data-auth-link="sign-in">Sign in</a>
+      <a href="account.html" data-auth-link="account" hidden>My account</a>
       <a href="admin.html" aria-current="page">Admin</a>
     </nav>
   </header>
@@ -25,8 +26,8 @@
     <p class="database-status" id="adminStatus" role="status" aria-live="polite"></p>
 
     <section class="database-panel" id="adminLoginPanel">
-      <h1>Idea administration</h1>
-      <p>Sign in with an admin account to review submissions and manage the public listing.</p>
+      <h1>Content administration</h1>
+      <p>Sign in with an admin account to manage the public business idea listings.</p>
       <form class="database-form" id="adminSignInForm">
         <label>Email <input type="email" name="email" autocomplete="username" required></label>
         <label>Password <input type="password" name="password" autocomplete="current-password" required></label>
@@ -40,65 +41,88 @@
       <p id="adminSignedInAs"></p>
       <button class="database-action" id="adminSignOutButton" type="button">Sign out</button>
 
-      <h2 id="ideaFormTitle">Add an idea</h2>
-      <form class="database-form" id="ideaForm">
-        <input type="hidden" name="id">
-        <label>Name <input name="name" maxlength="100" required></label>
-        <label>Slug <input name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" required></label>
-        <label>Description <textarea name="description" minlength="10" maxlength="2000" required></textarea></label>
-        <label>Image URL (optional) <input name="image_url" type="url"></label>
-        <label>Details URL (optional) <input name="details_url" type="url"></label>
-        <label>Budget
-          <select name="budget_tier" required>
-            <option value="p500">Under 500</option>
-            <option value="p1000">Under 1,000</option>
-            <option value="p10000">Under 10,000</option>
-            <option value="p100000+">100,000+</option>
-          </select>
-        </label>
-        <label>Industry
-          <select name="industry" required>
-            <option value="tech">Technology</option>
-            <option value="agric">Agriculture &amp; Food</option>
-            <option value="digital">Digital</option>
-            <option value="education">Education</option>
-            <option value="stores">E-commerce &amp; Retail</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <label>Region
-          <select name="region">
-            <option value="">All of Africa</option>
-            <option value="local">Eastern Africa</option>
-            <option value="western">Western Africa</option>
-            <option value="northern">Northern Africa</option>
-            <option value="southern">Southern Africa</option>
-            <option value="middle">Middle Africa</option>
-          </select>
-        </label>
-        <label>Status
-          <select name="status" required>
-            <option value="approved">Approved / public</option>
-            <option value="pending">Pending review</option>
-            <option value="rejected">Rejected</option>
-          </select>
-        </label>
-        <div class="database-actions">
-          <button class="database-action" type="submit">Save idea</button>
-          <button id="cancelEditButton" type="button" hidden>Cancel edit</button>
-        </div>
-      </form>
-
-      <h2>All submissions and listings</h2>
+      <h2>New this week</h2>
       <div class="database-table-wrap">
         <table class="database-table">
-          <thead><tr><th>Idea</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Idea</th><th>Status</th><th>Created</th></tr></thead>
+          <tbody id="adminRecentIdeas"></tbody>
+        </table>
+      </div>
+
+      <h2>Earlier listings</h2>
+      <div class="database-table-wrap">
+        <table class="database-table">
+          <thead><tr><th>Idea</th><th>Status</th><th>Created</th></tr></thead>
           <tbody id="adminIdeas"></tbody>
         </table>
       </div>
+
+      <button class="database-action admin-add-idea-button" id="showIdeaFormButton" type="button" aria-expanded="false" aria-controls="ideaFormSection">Add an idea</button>
+      <section id="ideaFormSection" hidden>
+        <h2 id="ideaFormTitle">Add an idea</h2>
+        <form class="database-form" id="ideaForm">
+          <input type="hidden" name="id">
+          <label>Name <input name="name" maxlength="100" required></label>
+          <label>Slug <input name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" required></label>
+          <label>Description <textarea name="description" minlength="10" maxlength="2000" required></textarea></label>
+          <label>Detailed information (optional) <textarea name="details" maxlength="10000" rows="6"></textarea></label>
+          <label>Image URL (optional) <input name="image_url" type="url"></label>
+          <label>Image creator (optional) <input name="image_credit" maxlength="500"></label>
+          <label>Creator profile URL (optional) <input name="image_credit_url" type="url"></label>
+          <label>Image license (optional) <input name="image_license" maxlength="100"></label>
+          <label>License URL (optional) <input name="image_license_url" type="url"></label>
+          <label>Details URL (optional) <input name="details_url" type="url"></label>
+          <label>Budget
+            <select name="budget_tier" required>
+              <option value="p1000">Under 1,000</option>
+              <option value="p50000">Under 50,000</option>
+              <option value="p100000">Under 100,000</option>
+              <option value="p500000">Under 500,000</option>
+              <option value="p1000000">Under 1 million</option>
+              <option value="p1000000+">1 million+</option>
+            </select>
+          </label>
+          <label>Industry
+            <select name="industry" required>
+              <option value="tech">Technology</option>
+              <option value="agric">Agriculture &amp; Food</option>
+              <option value="digital">Digital</option>
+              <option value="education">Education</option>
+              <option value="stores">E-commerce &amp; Retail</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>Province
+            <select name="region">
+              <option value="">Not specified</option>
+              <option value="central">Central Province</option>
+              <option value="coast">Coast Province</option>
+              <option value="eastern">Eastern Province</option>
+              <option value="nairobi">Nairobi Province</option>
+              <option value="north_eastern">North Eastern Province</option>
+              <option value="nyanza">Nyanza Province</option>
+              <option value="rift_valley">Rift Valley Province</option>
+              <option value="western">Western Province</option>
+            </select>
+          </label>
+          <label>Status
+            <select name="status" required>
+              <option value="approved">Approved / public</option>
+              <option value="pending">Pending review</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </label>
+          <div class="database-actions">
+            <button class="database-action" type="submit">Save idea</button>
+            <button class="database-action" id="cancelEditButton" type="button">Cancel</button>
+          </div>
+        </form>
+      </section>
+
     </section>
   </main>
 
+  <script type="module" src="auth-nav.js"></script>
   <script type="module" src="admin.js"></script>
 </body>
 </html>

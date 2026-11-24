@@ -8,12 +8,17 @@ create table if not exists public.business_ideas (
   name text not null check (char_length(name) between 3 and 100),
   slug text not null unique check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   description text not null check (char_length(description) between 10 and 2000),
+  details text check (details is null or char_length(details) <= 10000),
   image_url text check (image_url is null or image_url ~* '^https?://'),
+  image_credit text check (image_credit is null or char_length(image_credit) <= 500),
+  image_credit_url text check (image_credit_url is null or image_credit_url ~* '^https?://'),
+  image_license text check (image_license is null or char_length(image_license) <= 100),
+  image_license_url text check (image_license_url is null or image_license_url ~* '^https?://'),
   details_url text check (details_url is null or details_url ~* '^https?://'),
-  budget_tier text not null check (budget_tier in ('p500', 'p1000', 'p10000', 'p100000+')),
+  budget_tier text not null check (budget_tier in ('p1000', 'p50000', 'p100000', 'p500000', 'p1000000', 'p1000000+')),
   industry text not null check (industry in ('tech', 'agric', 'digital', 'education', 'stores', 'other')),
   region text check (
-    region is null or region in ('local', 'western', 'northern', 'southern', 'middle')
+    region is null or region in ('central', 'coast', 'eastern', 'nairobi', 'north_eastern', 'nyanza', 'rift_valley', 'western')
   ),
   status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
   submitted_by uuid references auth.users (id) on delete set null,
@@ -77,23 +82,15 @@ create policy "Users can view their own admin role"
   using (user_id = (select auth.uid()));
 
 drop policy if exists "Approved ideas and own submissions are visible" on public.business_ideas;
-create policy "Approved ideas and own submissions are visible"
+drop policy if exists "Approved ideas are visible" on public.business_ideas;
+create policy "Approved ideas are visible"
   on public.business_ideas for select to anon, authenticated
   using (
     status = 'approved'
-    or submitted_by = (select auth.uid())
     or (select public.is_admin())
   );
 
 drop policy if exists "Signed-in users can submit pending ideas" on public.business_ideas;
-create policy "Signed-in users can submit pending ideas"
-  on public.business_ideas for insert to authenticated
-  with check (
-    submitted_by = (select auth.uid())
-    and status = 'pending'
-    and reviewed_by is null
-    and reviewed_at is null
-  );
 
 drop policy if exists "Admins can create ideas" on public.business_ideas;
 create policy "Admins can create ideas"
@@ -135,7 +132,10 @@ create policy "Users can remove their own favorites"
 
 grant execute on function public.is_admin() to anon, authenticated;
 grant usage on schema public to anon, authenticated;
-grant select on public.business_ideas to anon, authenticated;
+revoke select on public.business_ideas from public, anon;
+grant select (id, name, slug, description, image_url, image_credit, image_credit_url, image_license, image_license_url, budget_tier, industry, region, status, created_at)
+  on public.business_ideas to anon;
+grant select on public.business_ideas to authenticated;
 grant insert, update, delete on public.business_ideas to authenticated;
 grant select on public.idea_favorites to authenticated;
 grant insert, delete on public.idea_favorites to authenticated;
@@ -145,29 +145,29 @@ insert into public.business_ideas (name, slug, description, budget_tier, industr
 values
   ('Electronic Device Repairs', 'electronic-device-repairs',
    'Start a repair shop for phones, laptops, and gadgets with low capital and a steady stream of daily customers.',
-   'p1000', 'tech', 'local', 'approved'),
+   'p1000', 'tech', null, 'approved'),
   ('E-Commerce', 'e-commerce',
    'Tap into Africa''s booming online market, driven by growing populations, urbanisation, and technology adoption.',
    'p1000', 'stores', null, 'approved'),
   ('Freelancing', 'freelancing',
    'Earn by providing graphic design, software development, writing, or virtual assistance to a global clientele.',
-   'p500', 'tech', null, 'approved'),
+   'p1000', 'tech', null, 'approved'),
   ('Cassava Processing', 'cassava-processing',
    'Process cassava into flour, starch, or bioethanol and build value-added food products for local markets.',
    'p1000', 'agric', null, 'approved'),
   ('Waste-to-Energy Plant', 'waste-to-energy-plant',
    'Explore renewable energy and green technology through solar power, biogas, and eco-friendly manufacturing.',
-   'p100000+', 'tech', null, 'approved'),
+   'p500000', 'tech', null, 'approved'),
   ('Real Estate & Property Tech', 'real-estate-property-tech',
    'Meet the demand for affordable housing, property services, and short-term rentals in growing economic hubs.',
-   'p100000+', 'other', null, 'approved'),
+   'p500000', 'other', null, 'approved'),
   ('Technology & Software Development', 'technology-software-development',
    'Build software that solves local challenges in Africa''s growing technology hubs and markets.',
-   'p10000', 'tech', null, 'approved'),
+   'p50000', 'tech', null, 'approved'),
   ('Fashion & Beauty Industry', 'fashion-beauty-industry',
    'Build a local brand inspired by Africa''s young population, rising incomes, and distinctive styles.',
    'p1000', 'stores', null, 'approved'),
   ('Tourism', 'tourism',
    'Share Africa''s heritage, landscapes, and historic sites through eco-tourism, cultural tours, and adventure travel.',
-   'p100000+', 'other', null, 'approved')
+   'p500000', 'other', null, 'approved')
 on conflict (slug) do nothing;

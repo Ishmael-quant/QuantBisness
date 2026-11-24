@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /QuantBisness/admin.html
+
+Sitemap: https://ishmael-quant.github.io/QuantBisness/sitemap.xml

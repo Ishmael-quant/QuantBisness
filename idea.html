@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore a business idea and learn how to plan its launch.">
+  <meta property="og:title" content="Business Idea | QuantBisness">
+  <meta property="og:description" content="Explore a business idea and learn how to plan its launch.">
+  <title>Business Idea | QuantBisness</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="database.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="QuantBisness home">
+      <span class="brand-copy"><strong>Quant<span>Bisness</span></strong><small>Discover. Explore. Grow.</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="ideas.html" aria-current="page">Explore</a>
+      <a href="account.html">Account</a>
+      <a href="about.html">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="idea-detail-page">
+    <nav class="idea-breadcrumb" aria-label="Breadcrumb">
+      <a href="ideas.html">Business ideas</a>
+      <span aria-hidden="true">/</span>
+      <span id="breadcrumbTitle">Idea details</span>
+    </nav>
+    <p class="database-status idea-detail-status" id="ideaDetailStatus" role="status" aria-live="polite"></p>
+
+    <article id="ideaDetailContent" hidden>
+      <section class="idea-detail-hero">
+        <div class="idea-detail-image-wrap" id="ideaImageWrap" hidden></div>
+        <div class="idea-detail-intro">
+          <p class="eyebrow"><span></span> Business idea</p>
+          <h1 id="ideaTitle"></h1>
+          <p class="idea-detail-description" id="ideaDescription"></p>
+          <div class="idea-detail-facts" id="ideaFacts"></div>
+          <p class="idea-budget-note">Budget tiers are broad planning estimates, not researched quotations. Verify local costs before investing.</p>
+          <div class="idea-detail-actions">
+            <a class="idea-back-link" href="ideas.html">← Back to all ideas</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="idea-detail-section idea-practical-details" id="ideaPracticalSection" hidden>
+        <div class="idea-detail-section-heading">
+          <p class="eyebrow">Plan your next steps</p>
+          <h2>Business setup guide</h2>
+          <p>Use this framework to validate and plan the business before committing significant time or money.</p>
+        </div>
+        <div class="idea-validation-grid" id="ideaSetupFormula" hidden></div>
+        <div class="idea-practical-copy" id="ideaPracticalDetails"></div>
+      </section>
+
+      <section class="idea-detail-cta" id="ideaGuideSignIn" hidden>
+        <div>
+          <p class="eyebrow">Member access</p>
+          <h2>Want to see how to set it up?</h2>
+          <p>Create an account or sign in to view the business setup guide for this idea.</p>
+        </div>
+        <a class="idea-account-link" href="account.html#sign-in">Sign in or create an account <span aria-hidden="true">→</span></a>
+      </section>
+    </article>
+  </main>
+
+  <script type="module" src="idea-details.js"></script>
+</body>
+</html>

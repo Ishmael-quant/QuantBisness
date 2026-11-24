@@ -1,19 +1,90 @@
 import { isSupabaseConfigured, supabase } from './supabase-client.js';
+import { appendIdeaImageCredit } from './idea-image-credit.js';
 
 const cardGrid = document.getElementById('cardGrid');
 const statusMessage = document.getElementById('databaseStatus');
-const accountLink = document.querySelector('.main-nav a[href="account.html"]');
+const searchForm = document.getElementById('ideaSearchForm');
+const fallbackIdeaImageUrl = new URL('idea-placeholder.svg', document.baseURI).href;
 const favoriteIds = new Set();
 const starterAssets = new Map(
   [...cardGrid.querySelectorAll('.idea-card')].map(card => [
     card.querySelector('h3').textContent.toLowerCase(),
     {
-      imageUrl: card.querySelector('img')?.src,
-      detailsUrl: card.querySelector('.idea-btn')?.href
+      imageUrl: card.querySelector('img')?.src
     }
   ])
 );
 let currentUser = null;
+
+function ideaSlug(name) {
+  return name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function ideaDetailsUrl(idea) {
+  const identifier = idea.id || idea.slug || ideaSlug(idea.name);
+  const params = new URLSearchParams({
+    [idea.id ? 'id' : 'slug']: identifier,
+    name: idea.name,
+    description: idea.description,
+    budget: idea.budget_tier,
+    industry: idea.industry
+  });
+  if (idea.image_url) params.set('image', idea.image_url);
+  if (idea.image_credit) params.set('imageCredit', idea.image_credit);
+  if (idea.image_credit_url) params.set('imageCreditUrl', idea.image_credit_url);
+  if (idea.image_license) params.set('imageLicense', idea.image_license);
+  if (idea.image_license_url) params.set('imageLicenseUrl', idea.image_license_url);
+  if (idea.region) params.set('region', idea.region);
+  return `idea.html?${params}`;
+}
+
+function linkIdeaCard(card, url) {
+  const image = card.querySelector('img');
+  if (image && !image.closest('a')) {
+    const imageLink = document.createElement('a');
+    imageLink.className = 'idea-card-media-link';
+    imageLink.href = url;
+    imageLink.setAttribute('aria-label', `View ${image.alt} business idea`);
+    image.before(imageLink);
+    imageLink.append(image);
+  }
+
+  const title = card.querySelector('h3');
+  if (title && !title.querySelector('a')) {
+    const titleLink = document.createElement('a');
+    titleLink.className = 'idea-card-title-link';
+    titleLink.href = url;
+    titleLink.textContent = title.textContent;
+    title.replaceChildren(titleLink);
+  }
+
+  const detailsLink = card.querySelector('.idea-btn');
+  if (detailsLink) {
+    detailsLink.href = url;
+    detailsLink.textContent = 'View idea';
+  }
+}
+
+cardGrid.querySelectorAll('.idea-card').forEach(card => {
+  const name = card.querySelector('h3')?.textContent || '';
+  const description = card.querySelector('.idea-content p')?.textContent || '';
+  const [budget_tier, industry, region] = card.className.split(/\s+/).slice(1);
+  const image = card.querySelector('img');
+  if (image) addImageFallback(card, image);
+  linkIdeaCard(card, ideaDetailsUrl({
+    name,
+    description,
+    image_url: image?.src,
+    budget_tier,
+    industry,
+    region: region === 'all' ? null : region
+  }));
+});
+
+searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+  window.applyFilters();
+});
 
 function setStatus(message, state = '') {
   statusMessage.textContent = message;
@@ -31,45 +102,60 @@ function safeHttpUrl(value) {
   }
 }
 
+function addImageFallback(card, image) {
+  const showFallback = () => {
+    if (image.dataset.fallback === 'true') return;
+    image.dataset.fallback = 'true';
+    card.querySelector('.idea-image-credit')?.remove();
+    image.src = fallbackIdeaImageUrl;
+  };
+
+  image.addEventListener('error', showFallback, { once: true });
+  if (image.complete && image.naturalWidth === 0 && image.src !== fallbackIdeaImageUrl) {
+    showFallback();
+  }
+}
+
 function createIdeaCard(idea) {
   const card = document.createElement('article');
   card.className = `idea-card ${idea.budget_tier} ${idea.industry} ${idea.region || 'all'}`;
 
   const starter = starterAssets.get(idea.name.toLowerCase());
   const imageUrl = safeHttpUrl(idea.image_url) || safeHttpUrl(starter?.imageUrl);
-  if (imageUrl) {
-    const image = document.createElement('img');
-    image.src = imageUrl;
-    image.alt = idea.name;
-    image.loading = 'lazy';
-    card.append(image);
-  } else {
-    const placeholder = document.createElement('div');
-    placeholder.className = 'idea-image-placeholder';
-    placeholder.setAttribute('aria-hidden', 'true');
-    placeholder.textContent = '✦';
-    card.append(placeholder);
-  }
+  const detailsUrl = ideaDetailsUrl(idea);
+  const imageLink = document.createElement('a');
+  imageLink.className = 'idea-card-media-link';
+  imageLink.href = detailsUrl;
+  imageLink.setAttribute('aria-label', `View ${idea.name} business idea`);
+  const image = document.createElement('img');
+  image.src = imageUrl || fallbackIdeaImageUrl;
+  image.alt = idea.name;
+  image.loading = 'lazy';
+  addImageFallback(card, image);
+  imageLink.append(image);
+  card.append(imageLink);
+  if (imageUrl) appendIdeaImageCredit(card, idea);
 
   const content = document.createElement('div');
   content.className = 'idea-content';
 
   const title = document.createElement('h3');
-  title.textContent = idea.name;
+  const titleLink = document.createElement('a');
+  titleLink.className = 'idea-card-title-link';
+  titleLink.href = detailsUrl;
+  titleLink.textContent = idea.name;
+  title.append(titleLink);
   content.append(title);
 
   const description = document.createElement('p');
   description.textContent = idea.description;
   content.append(description);
 
-  const detailsUrl = safeHttpUrl(idea.details_url) || safeHttpUrl(starter?.detailsUrl);
-  if (detailsUrl) {
-    const detailsLink = document.createElement('a');
-    detailsLink.className = 'idea-btn';
-    detailsLink.href = detailsUrl;
-    detailsLink.textContent = 'Show more';
-    content.append(detailsLink);
-  }
+  const detailsLink = document.createElement('a');
+  detailsLink.className = 'idea-btn';
+  detailsLink.href = detailsUrl;
+  detailsLink.textContent = 'View idea';
+  content.append(detailsLink);
 
   const favoriteButton = document.createElement('button');
   favoriteButton.className = 'idea-save';
@@ -91,17 +177,16 @@ async function loadIdeas() {
   try {
     const { data: ideas, error } = await supabase
       .from('business_ideas')
-      .select('id, name, description, image_url, details_url, budget_tier, industry, region')
+      .select('id, name, slug, description, image_url, image_credit, image_credit_url, image_license, image_license_url, budget_tier, industry, region')
       .eq('status', 'approved')
       .order('created_at', { ascending: false });
     if (error) throw error;
 
-    const { data: userData, error: userError } = await supabase.auth.getUser();
+    const { data: userData, error: userError } = await supabase.auth.getSession();
     if (userError) throw userError;
-    currentUser = userData.user;
+    currentUser = userData.session?.user || null;
 
     if (currentUser) {
-      if (accountLink) accountLink.textContent = 'Account & saved ideas';
       const { data: favorites, error: favoritesError } = await supabase
         .from('idea_favorites')
         .select('idea_id')

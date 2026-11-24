@@ -4,6 +4,7 @@ QuantBisness helps people explore business ideas and, with an account, access pr
 
 ## Pages and features
 
+<<<<<<< HEAD
 - [Home](./index.html) introduces QuantBisness.
 - [Explore business ideas](./ideas.html) provides public listings and filters for budget, industry, and region. Anyone can browse.
 - Opening an idea shows its public description and budget context. Signed-in users can view the five-step setup guide and any additional guidance published by an administrator.
@@ -33,3 +34,13 @@ QuantBisness helps people explore business ideas and, with an account, access pr
 7. Set the Supabase Auth site URL to your local or deployed site, serve the site over localhost or HTTPS, and open `ideas.html`. Search text and filter activity are not recorded.
 
 The removed marketplace and market-insight SQL files are no longer part of setup. The cleanup migration revokes access to their legacy database objects but leaves existing rows in place.
+=======
+#How you can help                                                         
+1-You can send business ideas and how to set them up.                                                  
+2-any other that you feel can help
+3-advice and recommendations
+
+## Pages
+- [Home](https://ishmael-quant.github.io/QuantBisness/index.html)) introduces QuantBisness and links to business sectors.
+- [Explore business ideas](https://ishmael-quant.github.io/QuantBisness/ideas.html)) provides searchable listings and budget, industry, and region filters.
+>>>>>>> 316d66d17fb721d661b125305627818f635a6ba0
